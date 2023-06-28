@@ -4,44 +4,44 @@ import java.util.Objects;
 
 public class Usuario {
 	
-	private String mailOrganizador;
-	private String nombreOrganizador;
-	private Integer edadOrganizador;
+	private String mail;
+	private String nombre;
+	private Integer edad;
 	
 	public Usuario(String mailOrganizador, String nombreOrganizador, Integer edadOrganizador) {
 		super();
-		this.mailOrganizador = mailOrganizador;
-		this.nombreOrganizador = nombreOrganizador;
-		this.edadOrganizador = edadOrganizador;
+		this.setMail(mailOrganizador);
+		this.nombre = nombreOrganizador;
+		this.edad = edadOrganizador;
 	}
 
 	public String getMailOrganizador() {
-		return mailOrganizador;
+		return nombre;
 	}
 
 	public void setMailOrganizador(String mailOrganizador) {
-		this.mailOrganizador = mailOrganizador;
+		this.nombre = mailOrganizador;
 	}
 
 	public String getNombreOrganizador() {
-		return nombreOrganizador;
+		return nombre;
 	}
 
 	public void setNombreOrganizador(String nombreOrganizador) {
-		this.nombreOrganizador = nombreOrganizador;
+		this.nombre = nombreOrganizador;
 	}
 
 	public Integer getEdadOrganizador() {
-		return edadOrganizador;
+		return edad;
 	}
 
 	public void setEdadOrganizador(Integer edadOrganizador) {
-		this.edadOrganizador = edadOrganizador;
+		this.edad = edadOrganizador;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(mailOrganizador);
+		return Objects.hash(nombre);
 	}
 
 	@Override
@@ -53,7 +53,15 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(mailOrganizador, other.mailOrganizador);
+		return Objects.equals(nombre, other.nombre);
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	

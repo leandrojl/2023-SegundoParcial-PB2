@@ -56,8 +56,10 @@ public class Evento implements Comparable<Persona>{
 	@Override
 	public int compareTo(Persona o) {
 		// TODO Auto-generated method stub
-		return String.compare;
+		return 0;
 	}
+
+	
 	
 	
 

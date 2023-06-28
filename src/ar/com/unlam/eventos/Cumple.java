@@ -1,5 +1,6 @@
 package ar.com.unlam.eventos;
 
+import ar.com.unlam.clases.Usuario;
 import ar.com.unlam.clases.UsuarioAgasajado;
 
 public class Cumple extends Evento{
@@ -30,9 +31,7 @@ public class Cumple extends Evento{
 
 	public void setCumplañero(UsuarioAgasajado cumplañero) {
 		this.cumplañero = cumplañero;
-	}
-
-	
+	}	
 
 	
 }

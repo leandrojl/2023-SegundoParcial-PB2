@@ -2,7 +2,7 @@ package ar.com.unlam.clases;
 
 import java.util.Objects;
 
-public class Usuario {
+public class Usuario implements Comparable<Usuario>{
 	
 	private String mail;
 	private String nombre;
@@ -62,6 +62,12 @@ public class Usuario {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	@Override
+	public int compareTo(Usuario otroUsuario) {
+		// TODO Auto-generated method stub
+		return this.nombre.compareTo(otroUsuario.nombre);
 	}
 
 	

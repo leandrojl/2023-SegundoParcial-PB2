@@ -9,6 +9,7 @@ import ar.com.unlam.clases.UsuarioAgasajado;
 import ar.com.unlam.clases.UsuarioOrganizador;
 import ar.com.unlam.eventos.Casamiento;
 import ar.com.unlam.eventos.Cumple;
+import ar.com.unlam.excepciones.EventoNoEncontradoException;
 
 public class TestSegundoParcial {
 	@Test
@@ -89,56 +90,129 @@ public class TestSegundoParcial {
 		
 	}
 	
-//	@Test
-//	public void queSePuedaInvitarGenteAUnCumpleanios() {
-//		// Preparación
-//		final String mailOrganizador = "chiquitapia@afa.com", nombreOrganizador = "Chiqui Tapia", mailAgasajado = "lio@Messi.com", nombreAgasajado = "Lionel Messi";
-//		final Integer edadOrganizador = 55, edadAgasajado = 36;
-//		final Integer cantidadDeUsuariosEsperados = 4, cantidadDeInvitadosEsperados = 2;
-//		
-//		// Ejecución
-//		PlanificadorDeEventos principal = new PlanificadorDeEventos();
-//		principal.add(new Usuario(mailOrganizador, nombreOrganizador, edadOrganizador));
-//		principal.add(new Usuario("kunaguero@kunisports.com", "Sergio Aguero", 36));
-//		principal.add(new Usuario("kmbappe@second.com", "Kylian Mbapee", 24));
-//		Usuario organizadorDelEvento = principal.getUsuario(mailOrganizador);
-//		Cumple elCumpleDeLeo = new Cumple((Agasajado)new Usuario(mailAgasajado, nombreAgasajado, edadAgasajado));
-//		principal.crear(organizadorDelEvento, elCumpleDeLeo);
-//		principal.invitar(elCumpleDeLeo, new Usuario("kunaguero@kunisports.com", "Sergio Aguero", 36));
-//		principal.invitar(elCumpleDeLeo, new Usuario("kmbappe@second.com", "Kylian Mbapee", 24));
-//		
-//		// Validación
-//		assertEquals(cantidadDeUsuariosEsperados, principal.getCantidadDeUsuarios());
-//		assertEquals(cantidadDeInvitadosEsperados, principal.getCantidadDeInvitados());
-//	}
-//	
-//	@Test
-//	public void queUnInvitadoPuedaConfirarSuAsistencia () {
-//		// Preparación
-//		final String mailOrganizador = "chiquitapia@afa.com", nombreOrganizador = "Chiqui Tapia", mailAgasajado = "lio@Messi.com", nombreAgasajado = "Lionel Messi";
-//		final Integer edadOrganizador = 55, edadAgasajado = 36;
-//		final Integer cantidadDeUsuariosEsperados = 4, cantidadDeInvitadosEsperados = 2, cantidadDeInvitadosConfirmados = 1;
-//		Usuario elKun = new Usuario("kunaguero@kunisports.com", "Sergio Aguero", 36);
-//		Usuario elSegundo = new Usuario("kmbappe@second.com", "Kylian Mbapee", 24);
-//		
-//		// Ejecución
-//		PlanificadorDeEventos principal = new PlanificadorDeEventos();
-//		principal.add(new Usuario(mailOrganizador, nombreOrganizador, edadOrganizador));
-//		principal.add(elKun);
-//		principal.add(elSegundo);
-//		Usuario organizadorDelEvento = principal.getUsuario(mailOrganizador);
-//		
-//		Usuario agasajado = new Agasajado(mailAgasajado, nombreAgasajado, edadAgasajado));
-//		principal.crear(organizadorDelEvento, new Cumple(agasajado);
-//		principal.invitar(elCumpleDeLeo, elKun);
-//		principal.invitar(elCumpleDeLeo, elSegundo);
-//		principal.confirmar(elCumpleDeLeo, elKun);
-//		
-//		// Validación
-//		assertEquals(cantidadDeUsuariosEsperados, principal.getCantidadDeUsuarios());
-//		assertEquals(cantidadDeInvitadosEsperados, principal.getCantidadDeInvitados());
-//		assertEquals(cantidadDeInvitadosConfirmados, principal.getCantidadDeInvitadosConfirmados());
-//	}
+	@Test
+	public void queSePuedaInvitarGenteAUnCumpleanios() throws EventoNoEncontradoException {
+		
+		final String mailOrganizador = "chiquitapia@afa.com";
+		final String nombreOrganizador = "Chiqui Tapia";
+		final Integer edadOrganizador = 55;
+		
+		final String mailAgasajado = "lio@Messi.com";
+		final String nombreAgasajado = "Lionel Messi";
+		final Integer edadAgasajado = 36;
+		
+		
+		UsuarioOrganizador usuarioOrganizador = new UsuarioOrganizador(mailOrganizador, nombreOrganizador, edadOrganizador);
+		
+		UsuarioAgasajado usuarioAgasajado = new UsuarioAgasajado(nombreAgasajado, mailAgasajado, edadAgasajado);
+		Usuario usuarioInvitado1 = new Usuario("Tench", "tench@tench.com", 22);
+		Usuario usuarioInvitado2 = new Usuario("Julio", "Julio@tench.com", 18);
+		Usuario usuarioInvitado3 = new Usuario("Pedro", "pedro@tench.com", 25);
+		
+		Cumple nuevoCumple = new Cumple("Cumpleañito Feli",usuarioAgasajado);
+		
+		PlanificadorDeEventos principal = new PlanificadorDeEventos();
+		
+		// Ejecución
+		
+		principal.setUsuarioOrganizador(usuarioOrganizador);
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioOrganizador);
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioAgasajado);
+		principal.agregarEvento(nuevoCumple);
+		
+		principal.invitarUsuario(nuevoCumple, usuarioInvitado1);
+		principal.invitarUsuario(nuevoCumple, usuarioInvitado2);
+		principal.invitarUsuario(nuevoCumple, usuarioInvitado3);
+//		nuevoCumple.invitarUsuario(usuarioInvitado1);
+//		nuevoCumple.invitarUsuario(usuarioInvitado2);
+//		nuevoCumple.invitarUsuario(usuarioInvitado3);
+		
+		Assert.assertTrue(nuevoCumple.getListaInvitados().size() == 3);
+		Assert.assertTrue(nuevoCumple.getListaInvitados().contains(usuarioInvitado1));
+		Assert.assertTrue(nuevoCumple.getListaInvitados().contains(usuarioInvitado2));
+		Assert.assertTrue(nuevoCumple.getListaInvitados().contains(usuarioInvitado3));
+		
+	}
+	
+	@Test
+	public void queUnInvitadoPuedaConfirmarSuAsistencia () throws EventoNoEncontradoException {
+		// Preparación
+		final String mailOrganizador = "chiquitapia@afa.com";
+		final String nombreOrganizador = "Chiqui Tapia";
+		final Integer edadOrganizador = 55;
+		
+		final String mailAgasajado = "lio@Messi.com";
+		final String nombreAgasajado = "Lionel Messi";
+		final Integer edadAgasajado = 36;
+		
+		
+		UsuarioOrganizador usuarioOrganizador = new UsuarioOrganizador(mailOrganizador, nombreOrganizador, edadOrganizador);
+		
+		UsuarioAgasajado usuarioAgasajado = new UsuarioAgasajado(nombreAgasajado, mailAgasajado, edadAgasajado);
+		Usuario usuarioInvitado1 = new Usuario("Tench", "tench@tench.com", 22);
+		Usuario usuarioInvitado2 = new Usuario("Julio", "Julio@tench.com", 18);
+		Usuario usuarioInvitado3 = new Usuario("Pedro", "pedro@tench.com", 25);
+		
+		Cumple nuevoCumple = new Cumple("Cumpleañito Feli",usuarioAgasajado);
+		
+		PlanificadorDeEventos principal = new PlanificadorDeEventos();
+		
+		// Ejecución
+		principal.agregarEvento(nuevoCumple);
+		
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioOrganizador);
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioAgasajado);
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioInvitado1);
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioInvitado2);
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioInvitado3);
+		
+		
+		principal.invitarUsuario(nuevoCumple, usuarioInvitado1);
+		principal.invitarUsuario(nuevoCumple, usuarioInvitado2);
+		principal.invitarUsuario(nuevoCumple, usuarioInvitado3);
+		principal.confirmarInvitacion(nuevoCumple, usuarioInvitado1);
+		
+		Assert.assertTrue(principal.getInvitadosConfirmados().contains(usuarioInvitado1));
+		
+	
+	}
+	
+	@Test(expected=EventoNoEncontradoException.class)
+	public void queLanceExcepcionCuandoNoEncuentreElEvento() throws EventoNoEncontradoException {
+		
+		final String mailOrganizador = "chiquitapia@afa.com";
+		final String nombreOrganizador = "Chiqui Tapia";
+		final Integer edadOrganizador = 55;
+		
+		final String mailAgasajado = "lio@Messi.com";
+		final String nombreAgasajado = "Lionel Messi";
+		final Integer edadAgasajado = 36;
+		
+		
+		UsuarioOrganizador usuarioOrganizador = new UsuarioOrganizador(mailOrganizador, nombreOrganizador, edadOrganizador);
+		
+		UsuarioAgasajado usuarioAgasajado = new UsuarioAgasajado(nombreAgasajado, mailAgasajado, edadAgasajado);
+		Usuario usuarioInvitado1 = new Usuario("Tench", "tench@tench.com", 22);
+		Usuario usuarioInvitado2 = new Usuario("Julio", "Julio@tench.com", 18);
+		Usuario usuarioInvitado3 = new Usuario("Pedro", "pedro@tench.com", 25);
+		
+		Cumple nuevoCumple = new Cumple("Cumpleañito Feli",usuarioAgasajado);
+		Cumple nuevoCumple1 = new Cumple("Cumpleañito Felix",usuarioAgasajado);
+		
+		PlanificadorDeEventos principal = new PlanificadorDeEventos();
+		
+		// Ejecución
+		
+		principal.setUsuarioOrganizador(usuarioOrganizador);
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioOrganizador);
+		principal.agregarUsuarioALaListaDeUsuarios(usuarioAgasajado);
+		principal.agregarEvento(nuevoCumple);
+		
+		principal.invitarUsuario(nuevoCumple1, usuarioInvitado1);
+		principal.invitarUsuario(nuevoCumple1, usuarioInvitado2);
+		principal.invitarUsuario(nuevoCumple1, usuarioInvitado3);
+		
+	}
 
 }
 

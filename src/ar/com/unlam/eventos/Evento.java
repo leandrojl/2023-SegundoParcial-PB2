@@ -3,17 +3,18 @@ package ar.com.unlam.eventos;
 import java.util.Objects;
 import java.util.TreeSet;
 
-import ar.com.unlam.clases.Persona;
 
-public class Evento implements Comparable<Persona>{
+import ar.com.unlam.clases.Usuario;
+
+public class Evento {
 	
 	private String nombre;
-	private TreeSet<Persona> listaInvitados;
+	private TreeSet<Usuario> listaInvitados;
 
 	public Evento(String nombre) {
 		super();
 		this.setNombre(nombre);
-		this.listaInvitados = new TreeSet<Persona>();
+		this.listaInvitados = new TreeSet<Usuario>();
 	}
 	
 	public Evento() {
@@ -45,19 +46,15 @@ public class Evento implements Comparable<Persona>{
 		return Objects.equals(nombre, other.nombre);
 	}
 
-	public TreeSet<Persona> getListaInvitados() {
+	public TreeSet<Usuario> getListaInvitados() {
 		return listaInvitados;
 	}
 
-	public void setListaInvitados(TreeSet<Persona> listaInvitados) {
+	public void setListaInvitados(TreeSet<Usuario> listaInvitados) {
 		this.listaInvitados = listaInvitados;
 	}
 
-	@Override
-	public int compareTo(Persona o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	
 	

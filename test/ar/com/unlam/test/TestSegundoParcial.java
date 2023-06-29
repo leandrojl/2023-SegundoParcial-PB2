@@ -347,6 +347,8 @@ public class TestSegundoParcial {
 		Assert.assertTrue(nuevoCasamiento.getListaInvitados().first().equals(usuarioInvitado1));
 	}
 	
+	
+	
 }
 
 

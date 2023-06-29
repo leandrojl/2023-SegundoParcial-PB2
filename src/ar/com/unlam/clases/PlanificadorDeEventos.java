@@ -67,10 +67,13 @@ public class PlanificadorDeEventos {
 		this.usuarios = usuarios;
 	}
 
-	public void agregarUsuarioALaListaDeUsuarios(Usuario usuario) {
+	public void agregarUsuarioALaListaDeUsuarios(Usuario usuario){
+		
 		this.usuarios.add(usuario);
 		
 	}
+
+	
 
 	public void invitarUsuario(Evento nuevoCumple, Usuario usuarioInvitado) throws EventoNoEncontradoException {
 		Evento evento = buscarEvento(nuevoCumple);

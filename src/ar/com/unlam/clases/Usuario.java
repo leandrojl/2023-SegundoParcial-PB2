@@ -8,36 +8,48 @@ public class Usuario implements Comparable<Usuario>{
 	private String nombre;
 	private Integer edad;
 	
-	public Usuario(String mailOrganizador, String nombreOrganizador, Integer edadOrganizador) {
+	public Usuario(String mail, String nombre, Integer edad) {
 		super();
-		this.setMail(mailOrganizador);
-		this.nombre = nombreOrganizador;
-		this.edad = edadOrganizador;
+		this.mail = mail;
+		this.nombre = nombre;
+		this.edad = edad;
 	}
 
-	public String getMailOrganizador() {
+	public String getMail() {
+		return mail;
+	}
+
+
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+
+
+	public String getNombre() {
 		return nombre;
 	}
 
-	public void setMailOrganizador(String mailOrganizador) {
-		this.nombre = mailOrganizador;
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getNombreOrganizador() {
-		return nombre;
-	}
 
-	public void setNombreOrganizador(String nombreOrganizador) {
-		this.nombre = nombreOrganizador;
-	}
 
-	public Integer getEdadOrganizador() {
+	public Integer getEdad() {
 		return edad;
 	}
 
-	public void setEdadOrganizador(Integer edadOrganizador) {
-		this.edad = edadOrganizador;
+
+
+	public void setEdad(Integer edad) {
+		this.edad = edad;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -56,13 +68,7 @@ public class Usuario implements Comparable<Usuario>{
 		return Objects.equals(nombre, other.nombre);
 	}
 
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
+	
 
 	@Override
 	public int compareTo(Usuario otroUsuario) {

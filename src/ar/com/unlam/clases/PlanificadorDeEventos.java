@@ -4,6 +4,7 @@ import java.util.HashSet;
 import ar.com.unlam.eventos.Cumple;
 import ar.com.unlam.eventos.Evento;
 import ar.com.unlam.excepciones.EventoNoEncontradoException;
+import ar.com.unlam.excepciones.UsuarioNoInvitadoException;
 
 public class PlanificadorDeEventos {
 	
@@ -87,10 +88,19 @@ public class PlanificadorDeEventos {
 		throw new EventoNoEncontradoException("Evento no encontrado");
 	}
 
-	public void confirmarInvitacion(Cumple nuevoCumple, Usuario usuarioInvitado1) throws EventoNoEncontradoException {
+	public void confirmarInvitacion(Cumple nuevoCumple, Usuario usuarioInvitado) throws EventoNoEncontradoException, UsuarioNoInvitadoException {
 		Evento evento = buscarEvento(nuevoCumple);
-		
-		this.invitadosConfirmados.add(usuarioInvitado1);
+		Usuario usuario = buscarUsuario(usuarioInvitado);
+		this.invitadosConfirmados.add(usuario);
+	}
+
+	private Usuario buscarUsuario(Usuario usuarioInvitado) throws UsuarioNoInvitadoException {
+		for(Usuario usuario: usuarios) {
+			if(usuario.getNombre().equals(usuarioInvitado.getNombre())) {
+				return usuario;
+			}
+		}
+		throw new UsuarioNoInvitadoException("Usuario no invitado");
 	}
 
 	public HashSet<Usuario> getInvitadosConfirmados() {

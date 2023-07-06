@@ -23,4 +23,6 @@ Para resolver el siguiente ejercicio se utilizo el lenguaje Java enfocado en el 
 ## Como utilizar este archivo:
 1) En el caso de clonar el repositorio : `https://github.com/leandrojl/2023-SegundoParcial-PB2.git`
 
+## MIT License
 
+Copyright (c) 2023 Leandro J. Loureiro
